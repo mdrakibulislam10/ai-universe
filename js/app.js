@@ -16,9 +16,9 @@ const displayAiToolsData = tools => {
     const toolsContainer = document.getElementById("tools-container");
 
     tools.forEach(tool => {
-        console.log(tool);
+        // console.log(tool);
         // destructuring
-        const { image, features, name, published_in } = tool;
+        const { image, features, name, published_in, id } = tool;
 
         const cardParent = document.createElement("div");
         cardParent.classList.add("col");
@@ -39,9 +39,8 @@ const displayAiToolsData = tools => {
                             <h5>${name ? name : "No Name Found"}</h5>
                             <p><i class="fa-solid fa-calendar-days"></i> ${published_in ? published_in : "No Date Found"}</p>
                           </div>
-
                           <div>
-                            <button class="btn bg-danger-subtle rounded-circle text-danger"><i class="fa-solid fa-arrow-right"></i></button>
+                            <button onclick="loadAiToolDetails('${id}')" class="btn bg-danger-subtle rounded-circle text-danger"><i class="fa-solid fa-arrow-right"></i></button>
                           </div>
                         </div>
                     </div>
@@ -50,3 +49,16 @@ const displayAiToolsData = tools => {
         toolsContainer.appendChild(cardParent);
     });
 };
+
+// load ai tool details
+const loadAiToolDetails = async (id) => {
+    try {
+        const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
+        const data = await res.json();
+        console.log(data.data);
+    }
+    catch (err) {
+        // console.log(err);
+    }
+};
+
