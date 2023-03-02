@@ -1,9 +1,9 @@
 // load ai tools data
-const loadAiToolsData = async () => {
+const loadAiToolsData = async (isTrue) => {
     try {
         const res = await fetch("https://openapi.programming-hero.com/api/ai/tools");
         const data = await res.json();
-        displayAiToolsData(data.data.tools);
+        displayAiToolsData(data.data.tools, isTrue);
     }
     catch (err) {
         console.log(err);
@@ -11,9 +11,19 @@ const loadAiToolsData = async () => {
 };
 
 // display ai tools data
-const displayAiToolsData = tools => {
+const displayAiToolsData = (tools, isTrue) => {
     // console.log(tools);
     const toolsContainer = document.getElementById("tools-container");
+    toolsContainer.innerHTML = "";
+
+    const seeMoreBtn = document.getElementById("see-more-btn");
+    if (!isTrue) { // isTrue === false;
+        tools = tools.slice(0, 6);
+        seeMoreBtn.classList.remove("d-none");
+    }
+    else {
+        seeMoreBtn.classList.add("d-none");
+    }
 
     tools.forEach(tool => {
         // console.log(tool);
@@ -67,12 +77,13 @@ const displayAiToolDetails = tool => {
     // console.log(tool);
 
     const { description, pricing, features, integrations, image_link, accuracy, input_output_examples } = tool;
+    // console.log(features[1]);
 
     document.getElementById("tool-container").innerHTML = `
-                        <div class="card w-100 vh-100 rounded-4">
+                        <div class="card w-100 rounded-4">
                             <div class="card-body bg-danger bg-opacity-10 border border-danger rounded-4">
                                 <h5 class="card-title">${description}</h5>
-                               <div class="d-flex flex-column flex-md-row justify-content-between gap-2 w-100 my-4">
+                               <div class="d-flex flex-column flex-md-row justify-content-between gap-2 w-100 my-5">
                                  <div class="text-center p-2 bg-white rounded-3 text-success fw-semibold">
                                  <span class="">${pricing[0]?.price ? pricing[0]?.price : "Free of Cost/"}</span> <br />
                                  <span class="">${pricing[0]?.plan ? pricing[0]?.plan : "Basic"}</span>
@@ -89,7 +100,7 @@ const displayAiToolDetails = tool => {
                                <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
                                  <div>
                                    <h5>Features</h5>
-                                   <ul class="text-opacity-75">
+                                   <ul class="text-secondary">
                                     <li>${features[1]?.feature_name}</li>
                                     <li>${features[2]?.feature_name}</li>
                                     <li>${features[3]?.feature_name}</li>
@@ -97,7 +108,7 @@ const displayAiToolDetails = tool => {
                                  </div>
                                  <div>
                                  <h5>Integrations</h5>
-                                   <ul class="text-opacity-75">
+                                   <ul class="text-secondary">
                                     <li>${integrations[0]}</li>
                                     <li>${integrations[1]}</li>
                                     <li>${integrations[2]}</li>
@@ -107,7 +118,7 @@ const displayAiToolDetails = tool => {
                             </div>
                         </div>
 
-                        <div class="card w-100 vh-100 rounded-4">
+                        <div class="card w-100 rounded-4">
                             <p id="no-accuracy">${accuracy?.score ? accuracy?.score : document.getElementById("no-accuracy").innerHTML = ""}% accuracy</p>
                             <img src="${image_link[0] ? image_link[0] : "No Image Found"}" class="card-img-top rounded-5 p-3" alt="...">
                             <div class="card-body text-center">
@@ -116,5 +127,3 @@ const displayAiToolDetails = tool => {
                             </div>
                         </div>`;
 };
-
-loadAiToolDetails("01")
