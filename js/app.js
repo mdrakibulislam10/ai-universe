@@ -133,7 +133,7 @@ const displayAiToolDetails = tool => {
              <div class="card-body text-center">
                  <h5 class="card-title">${input_output_examples[0]?.input ? input_output_examples[0]?.input : "No Data Found"}</h4>
                  <p class="card-text text-secondary">
-                ${!input_output_examples[0]?.output || (input_output_examples[0]?.output).startsWith("function") ? "No! Not Yet! Take a break!!!" : input_output_examples[0]?.output}</p>
+                ${input_output_examples[0]?.output ? input_output_examples[0]?.output : "No! Not Yet! Take a break!!!"}</p>
             </div>
         </div>`;
 };
