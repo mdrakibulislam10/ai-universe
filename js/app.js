@@ -88,12 +88,12 @@ const displayAiToolDetails = tool => {
                                 <h5 class="card-title">${description}</h5>
                                <div class="d-flex flex-column flex-md-row justify-content-between gap-2 w-100 my-5">
                                  <div class="text-center p-2 bg-white rounded-3 text-success fw-semibold">
-                                 <span class="">${pricing[0]?.price ? pricing[0]?.price : "Free of Cost/"}</span> <br />
-                                 <span class="">${pricing[0]?.plan ? pricing[0]?.plan : "Basic"}</span>
+                                 <span class="">${!pricing[0]?.price || (pricing[0]?.price) === "0" || (pricing[0]?.price).includes("No cost") ? "Free of Cost/" : pricing[0]?.price}</span> <br />
+                                 <span class="">${!pricing[0]?.plan || pricing[0]?.plan === "Free" ? "Basic" : pricing[0]?.plan}</span>
                                  </div>
                                  <div class="text-center p-2 bg-white rounded-3 fw-semibold" style="color: #F28927;">
-                                 <span class="">${pricing[1]?.price ? pricing[1]?.price : "Free Of Cost/"}</span> <br />
-                                 <span class="">${pricing[1]?.plan ? pricing[1]?.plan : "Pro"}</span>
+                                 <span class="">${!pricing[1]?.price || (pricing[1]?.price) === "0" || (pricing[1]?.price).includes("No cost") ? "Free of Cost/" : pricing[1]?.price}</span> <br />
+                                 <span class="">${!pricing[1]?.plan ? "Pro" : pricing[1]?.plan}</span>
                                  </div>
                                  <div class="text-center p-2 bg-white rounded-3 text-danger fw-semibold">
                                  <span class="">${pricing[2]?.price ? (pricing[2]?.price).slice(0, 10) : "Free of Cost /"}</span> <br />
@@ -128,7 +128,7 @@ const displayAiToolDetails = tool => {
                             <div class="card-body text-center">
                                 <h5 class="card-title">${input_output_examples[0]?.input ? input_output_examples[0]?.input : "No Data Found"}</h4>
                                 <p class="card-text text-secondary">
-                                ${input_output_examples[0]?.output && (input_output_examples[0]?.output).startsWith("function") ? "No! Not Yet! Take a break!!!" : input_output_examples[0]?.output}</p>
+                                ${!input_output_examples[0]?.output || (input_output_examples[0]?.output).startsWith("function") ? "No! Not Yet! Take a break!!!" : input_output_examples[0]?.output}</p>
                             </div>
                         </div>`;
 };
