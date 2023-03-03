@@ -1,9 +1,3 @@
-// spinner(loader) d-none or d-block
-const loaderToggle = isTrue => {
-  const loader = document.getElementById("loader");
-  !!isTrue ? loader.classList.remove("d-none") : loader.classList.add("d-none"); // isTrue === true;
-};
-
 // load ai tools data
 const loadAiToolsData = async (isTrue) => {
   loaderToggle(true);
@@ -86,7 +80,7 @@ const displayAiToolDetails = tool => {
   // console.log(tool);
 
   const { description, pricing, features, integrations, image_link, accuracy, input_output_examples } = tool;
-  // console.log(features[1]);
+  // console.log(input_output_examples[0]?.output);
 
   document.getElementById("tool-container").innerHTML = `
                         <div class="card w-100 rounded-4">
@@ -133,14 +127,20 @@ const displayAiToolDetails = tool => {
                             <img src="${image_link[0] ? image_link[0] : "No Image Found"}" class="card-img-top rounded-5 p-3" alt="...">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${input_output_examples[0]?.input ? input_output_examples[0]?.input : "No Data Found"}</h4>
-                                <p class="card-text text-secondary">${input_output_examples[0]?.output ? input_output_examples[0]?.output : "No! Not Yet! Take a break!!!"}</p>
+                                <p class="card-text text-secondary">
+                                ${input_output_examples[0]?.output && (input_output_examples[0]?.output).startsWith("function") ? "No! Not Yet! Take a break!!!" : input_output_examples[0]?.output}</p>
                             </div>
                         </div>`;
 };
 
+// spinner(loader) d-none or d-block
+const loaderToggle = isTrue => {
+  const loader = document.getElementById("loader");
+  !!isTrue ? loader.classList.remove("d-none") : loader.classList.add("d-none"); // isTrue === true;
+};
 
-// see more btn handler
-// document.getElementById("see-more-btn").addEventListener("click", function () {
-//   // document.getElementById("loader").classList.remove("d-none");
-//   loadAiToolsData(true);
-// });
+// sort by date handler
+const sortByDateBtn = () => {
+  console.log("sortByDateBtn");
+  // loadAiToolsData("sort");
+}
