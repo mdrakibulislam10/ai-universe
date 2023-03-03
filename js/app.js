@@ -1,39 +1,39 @@
 // load ai tools data
 const loadAiToolsData = async (isTrue) => {
-    try {
-        const res = await fetch("https://openapi.programming-hero.com/api/ai/tools");
-        const data = await res.json();
-        displayAiToolsData(data.data.tools, isTrue);
-    }
-    catch (err) {
-        console.log(err);
-    }
+  try {
+    const res = await fetch("https://openapi.programming-hero.com/api/ai/tools");
+    const data = await res.json();
+    displayAiToolsData(data.data.tools, isTrue);
+  }
+  catch (err) {
+    console.log(err);
+  }
 };
 
 // display ai tools data
 const displayAiToolsData = (tools, isTrue) => {
-    // console.log(tools);
-    const toolsContainer = document.getElementById("tools-container");
-    toolsContainer.innerHTML = "";
+  // console.log(tools);
+  const toolsContainer = document.getElementById("tools-container");
+  toolsContainer.innerHTML = "";
 
-    const seeMoreBtn = document.getElementById("see-more-btn");
-    if (!isTrue) { // isTrue === false;
-        tools = tools.slice(0, 6);
-        seeMoreBtn.classList.remove("d-none");
-    }
-    else {
-        seeMoreBtn.classList.add("d-none");
-    }
+  const seeMoreBtn = document.getElementById("see-more-btn");
+  if (!isTrue) { // isTrue === false;
+    tools = tools.slice(0, 6);
+    seeMoreBtn.classList.remove("d-none");
+  }
+  else {
+    seeMoreBtn.classList.add("d-none");
+  }
 
-    tools.forEach(tool => {
-        // console.log(tool);
+  tools.forEach(tool => {
+    // console.log(tool);
 
-        const { image, features, name, published_in, id } = tool;
+    const { image, features, name, published_in, id } = tool;
 
-        const cardParent = document.createElement("div");
-        cardParent.classList.add("col");
+    const cardParent = document.createElement("div");
+    cardParent.classList.add("col");
 
-        cardParent.innerHTML = `
+    cardParent.innerHTML = `
                 <div class="card h-100 rounded-4">
                     <img src="${image ? image : "No Image Found"}" class="card-img-top p-3 pb-0 rounded-5 h-50" alt="...">
                     <div class="card-body">
@@ -56,30 +56,30 @@ const displayAiToolsData = (tools, isTrue) => {
                     </div>
                 </div>`;
 
-        toolsContainer.appendChild(cardParent);
-    });
+    toolsContainer.appendChild(cardParent);
+  });
 };
 
 // load ai tool details
 const loadAiToolDetails = async (id) => {
-    try {
-        const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
-        const data = await res.json();
-        displayAiToolDetails(data.data);
-    }
-    catch (err) {
-        // console.log(err);
-    }
+  try {
+    const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
+    const data = await res.json();
+    displayAiToolDetails(data.data);
+  }
+  catch (err) {
+    // console.log(err);
+  }
 };
 
 // display ai tool details
 const displayAiToolDetails = tool => {
-    // console.log(tool);
+  // console.log(tool);
 
-    const { description, pricing, features, integrations, image_link, accuracy, input_output_examples } = tool;
-    // console.log(features[1]);
+  const { description, pricing, features, integrations, image_link, accuracy, input_output_examples } = tool;
+  // console.log(features[1]);
 
-    document.getElementById("tool-container").innerHTML = `
+  document.getElementById("tool-container").innerHTML = `
                         <div class="card w-100 rounded-4">
                             <div class="card-body bg-danger bg-opacity-10 border border-danger rounded-4">
                                 <h5 class="card-title">${description}</h5>
@@ -101,17 +101,17 @@ const displayAiToolDetails = tool => {
                                  <div>
                                    <h5>Features</h5>
                                    <ul class="text-secondary">
-                                    <li>${features[1]?.feature_name}</li>
-                                    <li>${features[2]?.feature_name}</li>
-                                    <li>${features[3]?.feature_name}</li>
+                                    <li>${features[1]?.feature_name ? features[1]?.feature_name : "No Data Found"}</li>
+                                    <li>${features[2]?.feature_name ? features[2]?.feature_name : "No Data Found"}</li>
+                                    <li>${features[3]?.feature_name ? features[3]?.feature_name : "No Data Found"}</li>
                                    </ul>
                                  </div>
                                  <div>
                                  <h5>Integrations</h5>
                                    <ul class="text-secondary">
-                                    <li>${integrations[0]}</li>
-                                    <li>${integrations[1]}</li>
-                                    <li>${integrations[2]}</li>
+                                    <li>${integrations[0] ? integrations[0] : "No Data Found"}</li>
+                                    <li>${integrations[1] ? integrations[1] : "No Data Found"}</li>
+                                    <li>${integrations[2] ? integrations[2] : "No Data Found"}</li>
                                    </ul>
                                  </div>
                                </div>
@@ -119,7 +119,8 @@ const displayAiToolDetails = tool => {
                         </div>
 
                         <div class="card w-100 rounded-4">
-                            <p id="no-accuracy">${accuracy?.score ? accuracy?.score : document.getElementById("no-accuracy").innerHTML = ""}% accuracy</p>
+                            <p id="no-accuracy" class="${accuracy?.score ? "bg-danger rounded-3 w-25 text-center p-2 fw-semibold position-absolute" : "bg-transparent"}" style="right: 25px; top: 25px;">
+                            ${accuracy?.score ? (accuracy?.score).toString().substring(2) + "% accuracy" : ""}</p>
                             <img src="${image_link[0] ? image_link[0] : "No Image Found"}" class="card-img-top rounded-5 p-3" alt="...">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${input_output_examples[0]?.input ? input_output_examples[0]?.input : "No Data Found"}</h4>
