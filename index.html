@@ -16,14 +16,21 @@
 <body class="container" onload="loadAiToolsData(false)">
     <!-- header -->
     <header>
-        <section class="text-center mb-3">
+        <section class="text-center">
             <h2 class="fw-bold my-4">AI Universe Hub</h2>
-            <button class="btn bg-danger bg opacity-75 text-white fw-semibold p-2">Sort By Date</button>
+            <button class="btn bg-danger bg opacity-75 text-white fw-semibold p-2 mb-5">Sort By Date</button>
         </section>
     </header>
 
     <!-- main -->
     <main>
+        <!-- loader -->
+        <section class="text-center my-5 d-none" id="loader">
+            <div class="spinner-grow" role="status">
+                <!-- <span class="visually-hidden">Loading...</span> -->
+            </div>
+        </section>
+
         <!-- cards section -->
         <section>
             <div class="row row-cols-1 row-cols-md-3 g-4" id="tools-container">

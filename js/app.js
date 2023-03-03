@@ -1,5 +1,12 @@
+// spinner(loader) d-none or d-block
+const loaderToggle = isTrue => {
+  const loader = document.getElementById("loader");
+  !!isTrue ? loader.classList.remove("d-none") : loader.classList.add("d-none"); // isTrue === true;
+};
+
 // load ai tools data
 const loadAiToolsData = async (isTrue) => {
+  loaderToggle(true);
   try {
     const res = await fetch("https://openapi.programming-hero.com/api/ai/tools");
     const data = await res.json();
@@ -57,6 +64,8 @@ const displayAiToolsData = (tools, isTrue) => {
                 </div>`;
 
     toolsContainer.appendChild(cardParent);
+
+    loaderToggle(false);
   });
 };
 
@@ -72,7 +81,7 @@ const loadAiToolDetails = async (id) => {
   }
 };
 
-// display ai tool details
+// display ai tool details in modal
 const displayAiToolDetails = tool => {
   // console.log(tool);
 
@@ -128,3 +137,10 @@ const displayAiToolDetails = tool => {
                             </div>
                         </div>`;
 };
+
+
+// see more btn handler
+// document.getElementById("see-more-btn").addEventListener("click", function () {
+//   // document.getElementById("loader").classList.remove("d-none");
+//   loadAiToolsData(true);
+// });
