@@ -45,9 +45,10 @@ const displayAiToolsData = (tools, isTrue) => {
             <div class="card-body">
                 <h5 class="card-title my-3">Features</h5>
                 <div class="text-secondary">
-                  <p>1. <span>${features[0] ? features[0] : "No Data Found"}</span></p>
-                  <p>2. <span>${features[1] ? features[1] : "No Data Found"}</span></p>
-                  <p>3. <span>${features[2] ? features[2] : "No Data Found"}</span></p>
+                  <p><span>${features[0] ? "1. " + features[0] : ""}</span></p>
+                  <p><span>${features[1] ? "2. " + features[1] : ""}</span></p>
+                  <p><span>${features[2] ? "3. " + features[2] : ""}</span></p>
+                  <p><span>${features[3] ? "4. " + features[3] : ""}</span></p>
                 </div>
                  <hr />
                 <div class="d-flex justify-content-between align-items-center">
@@ -109,17 +110,17 @@ const displayAiToolDetails = tool => {
                  <div>
                    <h5>Features</h5>
                    <ul class="text-secondary">
-                    <li>${features ? (features[1]?.feature_name ? features[1]?.feature_name : "No Data Found") : "No Data Found"}</li>
-                    <li>${features ? (features[2]?.feature_name ? features[2]?.feature_name : "No Data Found") : "No Data Found"}</li>
-                    <li>${features ? (features[3]?.feature_name ? features[3]?.feature_name : "No Data Found") : "No Data Found"}</li>
+                    <li>${features ? (features[1]?.feature_name ? features[1]?.feature_name : "") : ""}</li>
+                    <li>${features ? (features[2]?.feature_name ? features[2]?.feature_name : "") : ""}</li>
+                    <li>${features ? (features[3]?.feature_name ? features[3]?.feature_name : "") : ""}</li>
                    </ul>
                  </div>
                  <div>
                  <h5>Integrations</h5>
                    <ul class="text-secondary">
-                    <li class="${!integrations ? "list-unstyled" : ""}">${integrations ? (integrations[0] ? integrations[0] : "No Data Found") : ""}</li>
-                    <li style="${!integrations ? "list-style: none; margin-left: -32px;" : ""}">${integrations ? (integrations[1] ? integrations[1] : "No Data Found") : "No Data Found"}</li>
-                    <li class="${!integrations ? "list-unstyled" : ""}">${integrations ? (integrations[2] ? integrations[2] : "No Data Found") : ""}</li>
+                    <li class="${!integrations || !integrations[0] ? "list-unstyled" : ""}">${integrations ? (integrations[0] ? integrations[0] : "") : ""}</li>
+                    <li style="${!integrations || !integrations[1] ? "list-style: none; margin-left: -32px;" : ""}">${integrations ? (integrations[1] ? integrations[1] : "") : "No Data Found"}</li>
+                    <li class="${!integrations || !integrations[2] ? "list-unstyled" : ""}">${integrations ? (integrations[2] ? integrations[2] : "") : ""}</li>
                    </ul>
                  </div>
                </div>
