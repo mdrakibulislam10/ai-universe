@@ -132,7 +132,7 @@ const displayAiToolDetails = tool => {
                 ${accuracy?.score ? (accuracy?.score).toString().substring(2) + "% accuracy" : ""}</p>
              <img src="${image_link ? image_link[0] : "No Image Found"}" class="card-img-top rounded-5 p-3" alt="...">
              <div class="card-body text-center">
-                 <h5 class="card-title">${input_output_examples ? input_output_examples[0]?.input : "No Data Found"}</h4>
+                 <h5 class="card-title">${input_output_examples ? input_output_examples[0]?.input : "Can you give any example?"}</h4>
                  <p class="card-text text-secondary">
                 ${input_output_examples ? input_output_examples[0]?.output : "No! Not Yet! Take a break!!!"}</p>
             </div>
